@@ -17,16 +17,35 @@ class ArticleController extends AbstractController
 {
    
 
-    #[Route('user/article_index', name: 'user/article_index')]
+    #[Route('user/article_index', name: 'articles')]
     public function index (ArticleRepository  $articleRepository ) : response {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         $articles = $articleRepository->findAll();
         return $this->render('article/index.html.twig', [
-            'articles' =>$articles,
+            'articles' =>$articles, 'title' => "Acceuil"
+        ]);
+
+
+    }
+
+
+
+
+    #[Route('user/acceuil', name: 'acceuil')]
+    public function articleCheapest (ArticleRepository  $articleRepository ) : response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $articles = $articleRepository->findThreeCheapest();
+        return $this->render('article/index.html.twig', [
+            'articles' =>$articles, 'title' => "Les 3 articles les moins chers"
         ]);
 
     }
+
+
+
+
 
 
 

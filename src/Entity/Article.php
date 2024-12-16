@@ -27,10 +27,21 @@ class Article
     #[Assert\NotBlank(message: "Le contenu ne peut pas être vide.")]
     private ?string $Content = null;
 
+
+
+  
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message: "La date de création ne peut pas être vide.")]
     #[Assert\Type(\DateTime::class, message: "La date de création doit être une date valide.")]
     private ?\DateTimeInterface $Creation_date = null;
+
+
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)] 
+#[Assert\NotBlank(message: "Le prix ne doit pas être vide.")]
+#[Assert\Positive(message: "Le prix doit être un nombre positif.")]
+private ?float $price = null;
 
 
     
@@ -40,6 +51,8 @@ class Article
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
     private $comments;
+
+
 
     #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(nullable: false)]
@@ -103,6 +116,21 @@ class Article
     public function getComments(): Collection
     {
         return $this->comments;
+    }
+
+
+
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(string $price): static
+    {
+        $this->price = $price;
+
+        return $this;
     }
 
 }

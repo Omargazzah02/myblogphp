@@ -21,16 +21,17 @@ security:
             form_login:
                 login_path: login       # URL vers la page de login
                 check_path: login # URL de vérification du formulaire de login
-                default_target_path: user/article_index  # Redirection après connexion réussie
+                default_target_path: acceuil  # Redirection après connexion réussie
                 
             logout:
                 path: logout    # URL de déconnexion
-                target: /login       # Redirection après déconnexion
+                target: /       # Redirection après déconnexion
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_USER }
-        - { path: ^/login}
+        - { path: ^/}
+        - { path: ^/register}
 
 when@test:
     security:

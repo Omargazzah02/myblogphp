@@ -15,4 +15,5 @@ Puis, lancez le serveur avec la commande suivante : symfony serve:start
 Créez un compte en naviguant vers register dans la barre de navigation, puis connectez-vous.
 
 Nous avons une page d'accueil qui permet d'afficher les 3 articles les moins chers. Il y a également une page d'articles qui permet d'afficher tous les articles, et une page de détails d'article qui permet d'afficher les détails d'un article et de gérer les commentaires. Vous pouvez la consulter lorsque vous cliquez sur "Voir plus".
+essayez maintenant d'ajouter un commentaire !
 

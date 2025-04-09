@@ -1,7 +1,7 @@
 # Utiliser une image PHP avec FPM
 FROM php:8.2-cli
 
-# Installer les dépendances de base nécessaires
+# Installer les dépendances de base nécessaires pour Symfony
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -16,18 +16,21 @@ RUN apt-get update && apt-get install -y \
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 ENV PATH="$PATH:/root/.symfony*/bin"
 
-# Copier les fichiers de ton projet dans l'image Docker
+# Vérification de l'installation de Symfony CLI
+RUN symfony -v
+
+# Copier les fichiers du projet dans l'image Docker
 COPY . /var/www/symfony
 
 # Définir le répertoire de travail
 WORKDIR /var/www/symfony
 
-# Installer les dépendances avec Composer
+# Installer les dépendances avec Composer sans scripts automatiques
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install 
+RUN composer install --no-scripts
 
-# Exposer le port sur lequel Symfony va écouter
+# Exposer le port où Symfony écoutera (par défaut 8000)
 EXPOSE 8000
 
-# Démarrer le serveur Symfony
-CMD ["symfony", "serve:start", "--no-tls", "--port=8000"]
+# Démarrer le serveur Symfony avec le serveur PHP intégré
+CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]

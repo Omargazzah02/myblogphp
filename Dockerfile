@@ -1,5 +1,5 @@
 # Utiliser une image PHP avec FPM
-FROM php:8.2-fpm
+FROM php:8.2-cli
 
 # Installer les dépendances de base nécessaires
 RUN apt-get update && apt-get install -y \

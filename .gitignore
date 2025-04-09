@@ -2,3 +2,5 @@
 /vendor/
 /var/
 /node_modules/
+.env.dev
+.env.test

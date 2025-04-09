@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y \
 
 # Installer Symfony CLI (qui est nécessaire pour 'symfony serve:start')
 RUN curl -sS https://get.symfony.com/cli/installer | bash
-ENV PATH="$PATH:/root/.symfony*/bin"
+
+# Ajouter Symfony au PATH
+ENV PATH="/root/.symfony*/bin:$PATH"
 
 # Vérification de l'installation de Symfony CLI
 RUN symfony -v

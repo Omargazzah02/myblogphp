@@ -18,8 +18,6 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash
 # Ajouter Symfony au PATH
 ENV PATH="/root/.symfony*/bin:$PATH"
 
-# Vérification de l'installation de Symfony CLI (afficher la version pour debugger)
-RUN symfony -v
 
 # Copier les fichiers du projet dans l'image Docker
 COPY . /var/www/symfony

@@ -1,5 +1,4 @@
 <?php 
-
 // src/Form/RegistrationType.php
 namespace App\Form;
 
@@ -27,10 +26,9 @@ class RegistrationType extends AbstractType
                 ],
                 'attr' => ['placeholder' => 'Email']
             ])
-
             ->add('username', TextType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => "Le Username"]),
+                    new NotBlank(['message' => "Le Username est requis."]),
                 ],
                 'attr' => ['placeholder' => 'Username']
             ])
@@ -44,14 +42,16 @@ class RegistrationType extends AbstractType
                 ],
                 'attr' => ['placeholder' => 'Mot de passe']
             ])
-
-
-
             ->add('photo', TextType::class, [
-           
                 'attr' => ['placeholder' => 'Url de photo']
             ])
             ->add('submit', SubmitType::class, ['label' => 'S\'inscrire']);
+
+        // Désactiver la protection CSRF pour ce formulaire spécifique
+        $builder->setMethod('POST')
+                ->setAttributes([
+                    'csrf_protection' => false,  // Désactiver CSRF
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

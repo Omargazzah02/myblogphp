@@ -10,6 +10,7 @@
                 {{ form_row(form.photo) }}
 
         {{ form_row(form.submit) }}
+        {{ form_rest(form) }}  
     {{ form_end(form) }}
 
     {% for error in form.vars.errors %}

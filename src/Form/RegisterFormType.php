@@ -47,17 +47,17 @@ class RegistrationType extends AbstractType
             ])
             ->add('submit', SubmitType::class, ['label' => 'S\'inscrire']);
 
-        // Désactiver la protection CSRF pour ce formulaire spécifique
-        $builder->setMethod('POST')
-                ->setAttributes([
-                    'csrf_protection' => false,  // Désactiver CSRF
-                ]);
+        // CSRF protection should be enabled by default
+        // No need to disable it unless you have a specific reason
+        // Symfony will manage the CSRF token automatically for you
+        $builder->setMethod('POST');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'csrf_protection' => true,  // Activer la protection CSRF (par défaut)
         ]);
     }
 }
